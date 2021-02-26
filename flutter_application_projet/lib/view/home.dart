@@ -48,9 +48,9 @@ class _HomePageState extends State<HomePage> {
                 )),
             BottomNavigationBarItem(
                 label: "Past",
-                icon: Icon(CupertinoIcons.rocket_fill),
+                icon: Icon(CupertinoIcons.timer),
                 activeIcon: Icon(
-                  CupertinoIcons.heart_fill,
+                  CupertinoIcons.timer_fill,
                   color: Colors.blue,
                 ))
           ],

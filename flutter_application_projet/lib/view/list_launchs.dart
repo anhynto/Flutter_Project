@@ -38,6 +38,10 @@ class _LaunchListPageState extends State<LaunchListPage> {
                           ? Image.network(
                               launch.links.patch.small,
                               fit: BoxFit.contain,
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace stackTrace) {
+                                return Text("not loaded image");
+                              },
                             )
                           : Image.network(
                               "https://media.istockphoto.com/vectors/startup-icon-vector-id1074164928?k=6&m=1074164928&s=612x612&w=0&h=dD2gAKmO5MNG-eOh2WE34ZMoLSpF0j_YSYvTFKl-FfA="),

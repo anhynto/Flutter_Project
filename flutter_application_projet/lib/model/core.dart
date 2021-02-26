@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable(checked: true, explicitToJson: true)
 class Core {
   final String core;
   final int flight;
@@ -62,7 +65,7 @@ class Core {
 
   factory Core.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Core(
       core: map['core'],
       flight: map['flight']?.toInt(),
@@ -88,29 +91,29 @@ class Core {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Core &&
-      o.core == core &&
-      o.flight == flight &&
-      o.gridfins == gridfins &&
-      o.legs == legs &&
-      o.reused == reused &&
-      o.landing_attempt == landing_attempt &&
-      o.landing_success == landing_success &&
-      o.landing_type == landing_type &&
-      o.landpad == landpad;
+        o.core == core &&
+        o.flight == flight &&
+        o.gridfins == gridfins &&
+        o.legs == legs &&
+        o.reused == reused &&
+        o.landing_attempt == landing_attempt &&
+        o.landing_success == landing_success &&
+        o.landing_type == landing_type &&
+        o.landpad == landpad;
   }
 
   @override
   int get hashCode {
     return core.hashCode ^
-      flight.hashCode ^
-      gridfins.hashCode ^
-      legs.hashCode ^
-      reused.hashCode ^
-      landing_attempt.hashCode ^
-      landing_success.hashCode ^
-      landing_type.hashCode ^
-      landpad.hashCode;
+        flight.hashCode ^
+        gridfins.hashCode ^
+        legs.hashCode ^
+        reused.hashCode ^
+        landing_attempt.hashCode ^
+        landing_success.hashCode ^
+        landing_type.hashCode ^
+        landpad.hashCode;
   }
 }

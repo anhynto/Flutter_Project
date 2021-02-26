@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+@JsonSerializable(checked: true, explicitToJson: true)
 class Fairings {
   final bool reused;
   final bool recovery_attempt;
   final bool recovered;
-  final List<dynamic> ships;
+  final List<String> ships;
   Fairings({
     this.reused,
     this.recovery_attempt,
@@ -18,7 +20,7 @@ class Fairings {
     bool reused,
     bool recovery_attempt,
     bool recovered,
-    List<dynamic> ships,
+    List<String> ships,
   }) {
     return Fairings(
       reused: reused ?? this.reused,
@@ -44,7 +46,7 @@ class Fairings {
       reused: map['reused'],
       recovery_attempt: map['recovery_attempt'],
       recovered: map['recovered'],
-      ships: List<dynamic>.from(map['ships']),
+      ships: List<String>.from(map['ships']),
     );
   }
 

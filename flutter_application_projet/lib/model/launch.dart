@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'core.dart';
 import 'fairings.dart';
 import 'links.dart';
 
+@JsonSerializable(checked: true, explicitToJson: true)
 class Launch {
   final Fairings fairings;
   final Links links;
@@ -13,12 +15,12 @@ class Launch {
   final bool success;
   final String details;
   final List<dynamic> crew;
-  final List<String> ships;
+  final List<dynamic> ships;
   final List<dynamic> capsules;
   final String launchpad;
   final bool auto_update;
   final String launch_library_id;
-  final List<bool> failures;
+  final List<dynamic> failures;
   final int flight_number;
   final String name;
   final String date_utc;
@@ -26,7 +28,6 @@ class Launch {
   final String date_local;
   final String date_precision;
   final bool upcoming;
-  final List<Core> cores;
   final String id;
   Launch({
     this.fairings,
@@ -48,7 +49,6 @@ class Launch {
     this.date_local,
     this.date_precision,
     this.upcoming,
-    this.cores,
     this.id,
   });
 
@@ -59,7 +59,7 @@ class Launch {
     bool success,
     String details,
     List<dynamic> crew,
-    List<String> ships,
+    List<dynamic> ships,
     List<dynamic> capsules,
     String launchpad,
     bool auto_update,
@@ -95,7 +95,6 @@ class Launch {
       date_local: date_local ?? this.date_local,
       date_precision: date_precision ?? this.date_precision,
       upcoming: upcoming ?? this.upcoming,
-      cores: cores ?? this.cores,
       id: id ?? this.id,
     );
   }
@@ -121,7 +120,6 @@ class Launch {
       'date_local': date_local,
       'date_precision': date_precision,
       'upcoming': upcoming,
-      'cores': cores?.map((x) => x?.toMap())?.toList(),
       'id': id,
     };
   }
@@ -136,7 +134,7 @@ class Launch {
       success: map['success'],
       details: map['details'],
       crew: List<dynamic>.from(map['crew']),
-      ships: List<String>.from(map['ships']),
+      ships: List<dynamic>.from(map['ships']),
       capsules: List<dynamic>.from(map['capsules']),
       launchpad: map['launchpad'],
       auto_update: map['auto_update'],
@@ -149,18 +147,21 @@ class Launch {
       date_local: map['date_local'],
       date_precision: map['date_precision'],
       upcoming: map['upcoming'],
-      cores: List<Core>.from(map['cores']?.map((x) => Core.fromMap(x))),
       id: map['id'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Launch.fromJson(String source) => Launch.fromMap(json.decode(source));
+  factory Launch.fromJson(Map<String, dynamic> source) {
+    print(source);
+
+    return Launch.fromMap(source);
+  }
 
   @override
   String toString() {
-    return 'Launch(fairings: $fairings, links: $links, rocket: $rocket, success: $success, details: $details, crew: $crew, ships: $ships, capsules: $capsules, launchpad: $launchpad, auto_update: $auto_update, launch_library_id: $launch_library_id, failures: $failures, flight_number: $flight_number, name: $name, date_utc: $date_utc, date_unix: $date_unix, date_local: $date_local, date_precision: $date_precision, upcoming: $upcoming, cores: $cores, id: $id)';
+    return 'Launch(fairings: $fairings, links: $links, rocket: $rocket, success: $success, details: $details, crew: $crew, ships: $ships, capsules: $capsules, launchpad: $launchpad, auto_update: $auto_update, launch_library_id: $launch_library_id, failures: $failures, flight_number: $flight_number, name: $name, date_utc: $date_utc, date_unix: $date_unix, date_local: $date_local, date_precision: $date_precision, upcoming: $upcoming, id: $id)';
   }
 
   @override
@@ -187,7 +188,6 @@ class Launch {
         o.date_local == date_local &&
         o.date_precision == date_precision &&
         o.upcoming == upcoming &&
-        listEquals(o.cores, cores) &&
         o.id == id;
   }
 
@@ -212,7 +212,6 @@ class Launch {
         date_local.hashCode ^
         date_precision.hashCode ^
         upcoming.hashCode ^
-        cores.hashCode ^
         id.hashCode;
   }
 }

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
 import 'patch.dart';
 
+@JsonSerializable(checked: true, explicitToJson: true)
 class Links {
   final Patch patch;
   final String webcast;
@@ -29,7 +32,7 @@ class Links {
 
   factory Links.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Links(
       patch: Patch.fromMap(map['patch']),
       webcast: map['webcast'],
@@ -46,10 +49,8 @@ class Links {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Links &&
-      o.patch == patch &&
-      o.webcast == webcast;
+
+    return o is Links && o.patch == patch && o.webcast == webcast;
   }
 
   @override

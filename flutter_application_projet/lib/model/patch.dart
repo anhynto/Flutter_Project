@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable(checked: true, explicitToJson: true)
 class Patch {
   final String small;
   final String large;
@@ -27,7 +30,7 @@ class Patch {
 
   factory Patch.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Patch(
       small: map['small'],
       large: map['large'],
@@ -44,10 +47,8 @@ class Patch {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Patch &&
-      o.small == small &&
-      o.large == large;
+
+    return o is Patch && o.small == small && o.large == large;
   }
 
   @override

@@ -126,8 +126,7 @@ class Launch {
 
   factory Launch.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-
-    return Launch(
+    var launch = Launch(
       fairings: Fairings.fromMap(map['fairings']),
       links: Links.fromMap(map['links']),
       rocket: map['rocket'],
@@ -149,6 +148,8 @@ class Launch {
       upcoming: map['upcoming'],
       id: map['id'],
     );
+
+    return launch;
   }
 
   String toJson() => json.encode(toMap());

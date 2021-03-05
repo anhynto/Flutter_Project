@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_projet/view/list_launchs.dart';
+import 'package:flutter_application_projet/api/launch_manager.dart';
+import 'package:flutter_application_projet/model/launch.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -21,6 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Launch theNextLaunch;
   int _currentIndex = 0;
   PageController _pageController = PageController();
 
@@ -31,41 +34,65 @@ class _HomePageState extends State<HomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the HomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                label: "UpComming",
-                icon: Icon(CupertinoIcons.rocket_fill),
-                activeIcon: Icon(
-                  CupertinoIcons.rocket_fill,
-                  color: Colors.blue,
-                )),
-            BottomNavigationBarItem(
-                label: "Past",
-                icon: Icon(CupertinoIcons.timer),
-                activeIcon: Icon(
-                  CupertinoIcons.timer_fill,
-                  color: Colors.blue,
-                ))
-          ],
-          currentIndex: _currentIndex,
-          onTap: (newIndex) {
-            setState(() {
-              _currentIndex = newIndex;
-            });
-            _pageController.animateToPage(_currentIndex,
-                duration: kThemeAnimationDuration, curve: Curves.ease);
-          },
-        ),
-        body: PageView(
-          controller: _pageController,
-          children: [LaunchListPage(), LaunchListPage(past: true)],
-        ));
+    return FutureBuilder<Launch>(
+      future: LaunchManager().loadNextLaunch(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          theNextLaunch = snapshot.data;
+          return Scaffold(
+            appBar: AppBar(
+              // Here we take the value from the HomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
+              title: Text(widget.title),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                    label: "UpComming",
+                    icon: Icon(CupertinoIcons.rocket_fill),
+                    activeIcon: Icon(
+                      CupertinoIcons.rocket_fill,
+                      color: Colors.blue,
+                    )),
+                BottomNavigationBarItem(
+                    label: "Past",
+                    icon: Icon(CupertinoIcons.timer),
+                    activeIcon: Icon(
+                      CupertinoIcons.timer_fill,
+                      color: Colors.blue,
+                    ))
+              ],
+              currentIndex: _currentIndex,
+              onTap: (newIndex) {
+                setState(() {
+                  _currentIndex = newIndex;
+                });
+                _pageController.animateToPage(_currentIndex,
+                    duration: kThemeAnimationDuration, curve: Curves.ease);
+              },
+            ),
+            body: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Text(theNextLaunch.name),
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      children: [LaunchListPage(), LaunchListPage(past: true)],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 }

@@ -4,8 +4,6 @@ import 'package:flutter_application_projet/api/api_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
 
 class LaunchManager {
-  List<Launch> launches = [];
-
   static final LaunchManager _instance = LaunchManager._internal();
 
   factory LaunchManager() => _instance;
@@ -15,6 +13,7 @@ class LaunchManager {
   /// Charge et renvoie la liste des lancements passés
   Future<List<Launch>> loadPastLaunchs() async {
     // Calling API
+    List<Launch> launches = [];
     try {
       var response = await ApiManager().getPastLaunches();
       if (response != null && response.data != null) {
@@ -37,6 +36,7 @@ class LaunchManager {
   /// Charge et renvoie la liste des lancements passés
   Future<List<Launch>> loadCommingLaunchs() async {
     // Calling API
+    List<Launch> launches = [];
     try {
       var response = await ApiManager().getCommingLaunches();
       if (response != null && response.data != null) {
@@ -54,6 +54,27 @@ class LaunchManager {
     }
     //on renvoie la liste inversé afin d'avoir les plus récents en haut de la liste
     return List.from(launches.reversed);
+  }
+
+  Future<Launch> loadNextLaunch() async {
+    // Calling API
+    Launch launch;
+    try {
+      var response = await ApiManager().getNextLaunch();
+      if (response != null && response.data != null) {
+        // Mapping data
+        var results = response.data;
+        launch = Launch.fromMap(results);
+
+        /* launches = List<Map<String, dynamic>>.from(response.data["data"])
+            .map((json) => Launch.fromJson(json.toString()))
+            .toList(); */
+      }
+    } catch (e) {
+      print(e);
+    }
+    //on renvoie la liste inversé afin d'avoir les plus récents en haut de la liste
+    return launch;
   }
 
 /*   Future<Future> getSpot(int idSpot) async {

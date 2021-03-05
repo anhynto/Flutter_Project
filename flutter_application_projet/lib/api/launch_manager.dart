@@ -65,10 +65,6 @@ class LaunchManager {
         // Mapping data
         var results = response.data;
         launch = Launch.fromMap(results);
-
-        /* launches = List<Map<String, dynamic>>.from(response.data["data"])
-            .map((json) => Launch.fromJson(json.toString()))
-            .toList(); */
       }
     } catch (e) {
       print(e);

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_projet/api/launch_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
 
+import 'detail_launch.dart';
+
 class LaunchListPage extends StatefulWidget {
   final bool past;
 
@@ -29,6 +31,14 @@ class _LaunchListPageState extends State<LaunchListPage> {
             itemBuilder: (context, position) {
               Launch launch = launchs[position];
               return InkWell(
+                onTap: () async {
+                  var isFavorite = await Navigator.of(context).pushNamed(
+                      LaunchDetail.route,
+                      arguments: LaunchDetailArguments(launch: launch));
+                  if (!isFavorite) {
+                    setState(() {});
+                  }
+                },
                 child: Row(
                   children: [
                     Container(

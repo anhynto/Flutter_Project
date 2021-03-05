@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_projet/view/detail_launch.dart';
 import 'package:flutter_application_projet/view/home.dart';
+
+import 'model/launch.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,15 +33,14 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: (RouteSettings settings) {
-        //var arguments = settings.arguments;
+        var arguments = settings.arguments;
         switch (settings.name) {
-
-/*           case SpotDetail.route:
-            Spot spot;
-            if (arguments is SpotDetailArguments) {
-              spot = arguments.spot;
+          case LaunchDetail.route:
+            Launch launch;
+            if (arguments is LaunchDetailArguments) {
+              launch = arguments.launch;
             }
-            return MaterialPageRoute(builder: (_) => SpotDetail(spot)); */
+            return MaterialPageRoute(builder: (_) => LaunchDetail(launch));
 
           default:
             return MaterialPageRoute(

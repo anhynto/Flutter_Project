@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_projet/view/list_launchs.dart';
 import 'package:flutter_application_projet/api/launch_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -76,7 +77,25 @@ class _HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    child: theNextLaunch.links?.patch?.small != null
+                        ? Image.network(
+                            theNextLaunch.links.patch.small,
+                            fit: BoxFit.contain,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace stackTrace) {
+                              return Text("not loaded image");
+                            },
+                          )
+                        : Image.network(
+                            "https://media.istockphoto.com/vectors/startup-icon-vector-id1074164928?k=6&m=1074164928&s=612x612&w=0&h=dD2gAKmO5MNG-eOh2WE34ZMoLSpF0j_YSYvTFKl-FfA="),
+                  ),
                   Text(theNextLaunch.name),
+                  CountdownTimer(
+                    endTime: theNextLaunch.date_unix * 1000,
+                  ),
                   Expanded(
                     child: PageView(
                       controller: _pageController,

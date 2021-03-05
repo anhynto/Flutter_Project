@@ -61,7 +61,7 @@ class _LaunchListPageState extends State<LaunchListPage> {
                           SizedBox(
                             height: 8,
                           ),
-                          Text("Date : ${launch.date_local}")
+                          Text("Date : ${launch.date_utc}")
                         ],
                       ),
                     )

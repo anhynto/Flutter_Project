@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_projet/view/list_launchs.dart';
 import 'package:flutter_application_projet/api/launch_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
+import 'package:flutter_application_projet/view/map_view.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,6 +62,13 @@ class _HomePageState extends State<HomePage> {
                     activeIcon: Icon(
                       CupertinoIcons.timer_fill,
                       color: Colors.blue,
+                    )),
+                BottomNavigationBarItem(
+                    label: "Launchpad",
+                    icon: Icon(Icons.map_outlined),
+                    activeIcon: Icon(
+                      Icons.map_sharp,
+                      color: Colors.blue,
                     ))
               ],
               currentIndex: _currentIndex,
@@ -99,7 +107,12 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: PageView(
                       controller: _pageController,
-                      children: [LaunchListPage(), LaunchListPage(past: true)],
+                      children: [
+                        LaunchListPage(),
+                        LaunchListPage(past: true),
+                        MapSample()
+                      ],
+                      physics: NeverScrollableScrollPhysics(),
                     ),
                   ),
                 ],

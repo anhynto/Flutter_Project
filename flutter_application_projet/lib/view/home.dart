@@ -41,6 +41,8 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           theNextLaunch = snapshot.data;
+          //on planifie la notif du prochain lancement
+          LaunchManager().envoieNotification(theNextLaunch);
           return Scaffold(
             appBar: AppBar(
               // Here we take the value from the HomePage object that was created by

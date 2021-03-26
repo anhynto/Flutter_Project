@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_projet/api/launch_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
+import 'package:intl/intl.dart';
 
 import 'detail_launch.dart';
 
@@ -15,8 +17,7 @@ class LaunchListPage extends StatefulWidget {
 }
 
 class _LaunchListPageState extends State<LaunchListPage> {
-  final List<Launch> launchs = List();
-  var _icon;
+  final List<Launch> launchs = [];
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Launch>>(
@@ -30,13 +31,13 @@ class _LaunchListPageState extends State<LaunchListPage> {
           return ListView.builder(
             itemBuilder: (context, position) {
               Launch launch = launchs[position];
+              var date = DateFormat.yMMMMEEEEd()
+                  .add_jms()
+                  .format(DateTime.parse(launch.date_utc).toUtc());
               return InkWell(
                 onTap: () async {
                   await Navigator.of(context).pushNamed(LaunchDetail.route,
                       arguments: LaunchDetailArguments(launch: launch));
-                  // if (!isFavorite) {
-                  //   setState(() {});
-                  // }
                 },
                 child: Row(
                   children: [
@@ -70,7 +71,7 @@ class _LaunchListPageState extends State<LaunchListPage> {
                           SizedBox(
                             height: 8,
                           ),
-                          Text("Date : ${launch.date_utc}")
+                          Text("Date : $date")
                         ],
                       ),
                     ),

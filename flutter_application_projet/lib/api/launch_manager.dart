@@ -2,9 +2,14 @@ import 'dart:core';
 
 import 'package:flutter_application_projet/api/api_manager.dart';
 import 'package:flutter_application_projet/model/launch.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
+
+import 'package:timezone/timezone.dart' as tz;
+
+import '../main.dart';
 
 class LaunchManager {
   static final LaunchManager _instance = LaunchManager._internal();
@@ -115,5 +120,34 @@ class LaunchManager {
       },
     );
     return status;
+  }
+
+  void envoieNotification(Launch launch) async {
+    //var scheduleNotificationDateTime =
+    //    tz.TZDateTime.now(tz.UTC).add(const Duration(seconds: 1));
+    //paramétrage de la date pour la planification de la notif
+    var scheduleNotificationDateTime =
+        tz.TZDateTime.parse(tz.UTC, launch.date_utc);
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'alarm_notif',
+      'alarm_notif',
+      'Channel for launch notification',
+      icon: 'spacex_logo',
+      largeIcon: DrawableResourceAndroidBitmap('spacex_logo'),
+    );
+    final NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      launch.flight_number,
+      '${launch.name} is launching!',
+      '${launch.name} is launching right now. Don\'t miss it!',
+      scheduleNotificationDateTime,
+      platformChannelSpecifics,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
+    );
   }
 }

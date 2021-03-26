@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_projet/view/detail_launch.dart';
 import 'package:flutter_application_projet/view/home.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'model/launch.dart';
 
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('spacex_logo');
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onSelectNotification: (String payload) async {
+      if (payload != null) {
+        debugPrint('notification payload: $payload');
+      }
+    },
+  );
   runApp(MyApp());
 }
 

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_projet/api/launchpad_manager.dart';
+import 'package:flutter_application_projet/model/launchpad.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
@@ -10,6 +12,8 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
+  Set<Marker> _markers = {};
+
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
@@ -19,14 +23,39 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+    return FutureBuilder<List<Launchpad>>(
+      future: LaunchpadManager().loadLaunchpads(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          snapshot.data.forEach(
+            (launchpad) {
+              _markers.add(
+                Marker(
+                  markerId: MarkerId(launchpad.id),
+                  position: LatLng(launchpad.latitude, launchpad.longitude),
+                  infoWindow: InfoWindow(
+                      title: launchpad.fullName,
+                      snippet: launchpad.name +
+                          ' - ' +
+                          launchpad.locality +
+                          " - " +
+                          launchpad.region),
+                ),
+              );
+            },
+          );
+        }
+        return new Scaffold(
+          body: GoogleMap(
+            mapType: MapType.normal,
+            markers: _markers,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+        );
+      },
     );
   }
 

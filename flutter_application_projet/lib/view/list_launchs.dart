@@ -16,7 +16,7 @@ class LaunchListPage extends StatefulWidget {
 
 class _LaunchListPageState extends State<LaunchListPage> {
   final List<Launch> launchs = List();
-
+  var _icon;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Launch>>(
@@ -32,12 +32,11 @@ class _LaunchListPageState extends State<LaunchListPage> {
               Launch launch = launchs[position];
               return InkWell(
                 onTap: () async {
-                  var isFavorite = await Navigator.of(context).pushNamed(
-                      LaunchDetail.route,
+                  await Navigator.of(context).pushNamed(LaunchDetail.route,
                       arguments: LaunchDetailArguments(launch: launch));
-                  if (!isFavorite) {
-                    setState(() {});
-                  }
+                  // if (!isFavorite) {
+                  //   setState(() {});
+                  // }
                 },
                 child: Row(
                   children: [
@@ -74,7 +73,15 @@ class _LaunchListPageState extends State<LaunchListPage> {
                           Text("Date : ${launch.date_utc}")
                         ],
                       ),
-                    )
+                    ),
+                    IconButton(
+                        icon: Icon(launch.isLike
+                            ? Icons.favorite
+                            : Icons.favorite_outline),
+                        onPressed: () async {
+                          await LaunchManager().toogleLike(launch);
+                          setState(() {});
+                        }),
                   ],
                 ),
               );

@@ -29,28 +29,29 @@ class Launch {
   final String date_precision;
   final bool upcoming;
   final String id;
-  Launch({
-    this.fairings,
-    this.links,
-    this.rocket,
-    this.success,
-    this.details,
-    this.crew,
-    this.ships,
-    this.capsules,
-    this.launchpad,
-    this.auto_update,
-    this.launch_library_id,
-    this.failures,
-    this.flight_number,
-    this.name,
-    this.date_utc,
-    this.date_unix,
-    this.date_local,
-    this.date_precision,
-    this.upcoming,
-    this.id,
-  });
+  bool isLike;
+  Launch(
+      {this.fairings,
+      this.links,
+      this.rocket,
+      this.success,
+      this.details,
+      this.crew,
+      this.ships,
+      this.capsules,
+      this.launchpad,
+      this.auto_update,
+      this.launch_library_id,
+      this.failures,
+      this.flight_number,
+      this.name,
+      this.date_utc,
+      this.date_unix,
+      this.date_local,
+      this.date_precision,
+      this.upcoming,
+      this.id,
+      this.isLike = false});
 
   Launch copyWith({
     Fairings fairings,
@@ -127,27 +128,27 @@ class Launch {
   factory Launch.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     var launch = Launch(
-      fairings: Fairings.fromMap(map['fairings']),
-      links: Links.fromMap(map['links']),
-      rocket: map['rocket'],
-      success: map['success'],
-      details: map['details'],
-      crew: List<dynamic>.from(map['crew']),
-      ships: List<dynamic>.from(map['ships']),
-      capsules: List<dynamic>.from(map['capsules']),
-      launchpad: map['launchpad'],
-      auto_update: map['auto_update'],
-      launch_library_id: map['launch_library_id'],
-      failures: List<dynamic>.from(map['failures']),
-      flight_number: map['flight_number']?.toInt(),
-      name: map['name'],
-      date_utc: map['date_utc'],
-      date_unix: map['date_unix']?.toInt(),
-      date_local: map['date_local'],
-      date_precision: map['date_precision'],
-      upcoming: map['upcoming'],
-      id: map['id'],
-    );
+        fairings: Fairings.fromMap(map['fairings']),
+        links: Links.fromMap(map['links']),
+        rocket: map['rocket'],
+        success: map['success'],
+        details: map['details'],
+        crew: List<dynamic>.from(map['crew']),
+        ships: List<dynamic>.from(map['ships']),
+        capsules: List<dynamic>.from(map['capsules']),
+        launchpad: map['launchpad'],
+        auto_update: map['auto_update'],
+        launch_library_id: map['launch_library_id'],
+        failures: List<dynamic>.from(map['failures']),
+        flight_number: map['flight_number']?.toInt(),
+        name: map['name'],
+        date_utc: map['date_utc'],
+        date_unix: map['date_unix']?.toInt(),
+        date_local: map['date_local'],
+        date_precision: map['date_precision'],
+        upcoming: map['upcoming'],
+        id: map['id'],
+        isLike: false);
 
     return launch;
   }

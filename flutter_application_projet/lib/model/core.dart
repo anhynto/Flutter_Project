@@ -9,9 +9,9 @@ class Core {
   final bool gridfins;
   final bool legs;
   final bool reused;
-  final bool landing_attempt;
-  final bool landing_success;
-  final String landing_type;
+  final bool landingAttempt;
+  final bool landingSuccess;
+  final String landingType;
   final String landpad;
   Core({
     this.core,
@@ -19,9 +19,9 @@ class Core {
     this.gridfins,
     this.legs,
     this.reused,
-    this.landing_attempt,
-    this.landing_success,
-    this.landing_type,
+    this.landingAttempt,
+    this.landingSuccess,
+    this.landingType,
     this.landpad,
   });
 
@@ -31,9 +31,9 @@ class Core {
     bool gridfins,
     bool legs,
     bool reused,
-    bool landing_attempt,
-    bool landing_success,
-    String landing_type,
+    bool landingAttempt,
+    bool landingSuccess,
+    String landingType,
     String landpad,
   }) {
     return Core(
@@ -42,9 +42,9 @@ class Core {
       gridfins: gridfins ?? this.gridfins,
       legs: legs ?? this.legs,
       reused: reused ?? this.reused,
-      landing_attempt: landing_attempt ?? this.landing_attempt,
-      landing_success: landing_success ?? this.landing_success,
-      landing_type: landing_type ?? this.landing_type,
+      landingAttempt: landingAttempt ?? this.landingAttempt,
+      landingSuccess: landingSuccess ?? this.landingSuccess,
+      landingType: landingType ?? this.landingType,
       landpad: landpad ?? this.landpad,
     );
   }
@@ -56,9 +56,9 @@ class Core {
       'gridfins': gridfins,
       'legs': legs,
       'reused': reused,
-      'landing_attempt': landing_attempt,
-      'landing_success': landing_success,
-      'landing_type': landing_type,
+      'landing_attempt': landingAttempt,
+      'landing_success': landingSuccess,
+      'landing_type': landingType,
       'landpad': landpad,
     };
   }
@@ -72,9 +72,9 @@ class Core {
       gridfins: map['gridfins'],
       legs: map['legs'],
       reused: map['reused'],
-      landing_attempt: map['landing_attempt'],
-      landing_success: map['landing_success'],
-      landing_type: map['landing_type'],
+      landingAttempt: map['landing_attempt'],
+      landingSuccess: map['landing_success'],
+      landingType: map['landing_type'],
       landpad: map['landpad'],
     );
   }
@@ -85,7 +85,7 @@ class Core {
 
   @override
   String toString() {
-    return 'Core(core: $core, flight: $flight, gridfins: $gridfins, legs: $legs, reused: $reused, landing_attempt: $landing_attempt, landing_success: $landing_success, landing_type: $landing_type, landpad: $landpad)';
+    return 'Core(core: $core, flight: $flight, gridfins: $gridfins, legs: $legs, reused: $reused, landingAttempt: $landingAttempt, landingSuccess: $landingSuccess, landing_type: $landingType, landpad: $landpad)';
   }
 
   @override
@@ -98,9 +98,9 @@ class Core {
         o.gridfins == gridfins &&
         o.legs == legs &&
         o.reused == reused &&
-        o.landing_attempt == landing_attempt &&
-        o.landing_success == landing_success &&
-        o.landing_type == landing_type &&
+        o.landingAttempt == landingAttempt &&
+        o.landingSuccess == landingSuccess &&
+        o.landingType == landingType &&
         o.landpad == landpad;
   }
 
@@ -111,9 +111,9 @@ class Core {
         gridfins.hashCode ^
         legs.hashCode ^
         reused.hashCode ^
-        landing_attempt.hashCode ^
-        landing_success.hashCode ^
-        landing_type.hashCode ^
+        landingAttempt.hashCode ^
+        landingSuccess.hashCode ^
+        landingType.hashCode ^
         landpad.hashCode;
   }
 }

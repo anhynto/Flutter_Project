@@ -63,19 +63,23 @@ class _LaunchDetailState extends State<LaunchDetail> {
                     children: [
                       SizedBox(
                         height: 16,
+                        width: 16,
                       ),
                       widget.launch.success != null
                           ? widget.launch.success
-                              ? Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4)),
-                                      color: Colors.green),
-                                  child: Text(
-                                    "Success",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white),
+                              ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
+                                        color: Colors.green),
+                                    child: Text(
+                                      "Success",
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                    ),
                                   ),
                                 )
                               : Container(
@@ -83,7 +87,7 @@ class _LaunchDetailState extends State<LaunchDetail> {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(4)),
-                                      color: Colors.green),
+                                      color: Colors.red),
                                   child: Text(
                                     "Failure",
                                     style: TextStyle(
@@ -102,24 +106,22 @@ class _LaunchDetailState extends State<LaunchDetail> {
                 height: 16,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      widget.launch.flight_number.toString() +
+                      widget.launch.flightNumber.toString() +
                           " - " +
                           widget.launch.name,
-                      style: TextStyle(fontSize: 20),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 12,
                     ),
                     SizedBox(
                       height: 12,
-                    ),
-                    SizedBox(
-                      height: 20,
                     ),
                     _LauchDesc(launch.details),
                   ],
@@ -140,18 +142,26 @@ class _LauchDesc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Description",
-          style: TextStyle(fontSize: 18),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Description : ",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            Text(
+              description ?? "No Details",
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
         ),
-        SizedBox(
-          height: 6,
-        ),
-        Text(description ?? "No Details"),
-      ],
+      ),
     );
   }
 }

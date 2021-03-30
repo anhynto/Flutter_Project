@@ -18,15 +18,15 @@ class Launch {
   final List<dynamic> ships;
   final List<dynamic> capsules;
   final String launchpad;
-  final bool auto_update;
-  final String launch_library_id;
+  final bool autoUpdate;
+  final String launchLibraryId;
   final List<dynamic> failures;
-  final int flight_number;
+  final int flightNumber;
   final String name;
-  final String date_utc;
-  final int date_unix;
-  final String date_local;
-  final String date_precision;
+  final String dateUtc;
+  final int dateUnix;
+  final String dateLocal;
+  final String datePrecision;
   final bool upcoming;
   final String id;
   bool isLike;
@@ -40,15 +40,15 @@ class Launch {
       this.ships,
       this.capsules,
       this.launchpad,
-      this.auto_update,
-      this.launch_library_id,
+      this.autoUpdate,
+      this.launchLibraryId,
       this.failures,
-      this.flight_number,
+      this.flightNumber,
       this.name,
-      this.date_utc,
-      this.date_unix,
-      this.date_local,
-      this.date_precision,
+      this.dateUtc,
+      this.dateUnix,
+      this.dateLocal,
+      this.datePrecision,
       this.upcoming,
       this.id,
       this.isLike = false});
@@ -63,15 +63,15 @@ class Launch {
     List<dynamic> ships,
     List<dynamic> capsules,
     String launchpad,
-    bool auto_update,
-    String launch_library_id,
+    bool autoUpdate,
+    String launchLibraryId,
     List<dynamic> failures,
-    int flight_number,
+    int flightNumber,
     String name,
-    String date_utc,
-    int date_unix,
-    String date_local,
-    String date_precision,
+    String dateUtc,
+    int dateUnix,
+    String dateLocal,
+    String datePrecision,
     bool upcoming,
     List<Core> cores,
     String id,
@@ -86,15 +86,15 @@ class Launch {
       ships: ships ?? this.ships,
       capsules: capsules ?? this.capsules,
       launchpad: launchpad ?? this.launchpad,
-      auto_update: auto_update ?? this.auto_update,
-      launch_library_id: launch_library_id ?? this.launch_library_id,
+      autoUpdate: autoUpdate ?? this.autoUpdate,
+      launchLibraryId: launchLibraryId ?? this.launchLibraryId,
       failures: failures ?? this.failures,
-      flight_number: flight_number ?? this.flight_number,
+      flightNumber: flightNumber ?? this.flightNumber,
       name: name ?? this.name,
-      date_utc: date_utc ?? this.date_utc,
-      date_unix: date_unix ?? this.date_unix,
-      date_local: date_local ?? this.date_local,
-      date_precision: date_precision ?? this.date_precision,
+      dateUtc: dateUtc ?? this.dateUtc,
+      dateUnix: dateUnix ?? this.dateUnix,
+      dateLocal: dateLocal ?? this.dateLocal,
+      datePrecision: datePrecision ?? this.datePrecision,
       upcoming: upcoming ?? this.upcoming,
       id: id ?? this.id,
     );
@@ -111,15 +111,15 @@ class Launch {
       'ships': ships,
       'capsules': capsules,
       'launchpad': launchpad,
-      'auto_update': auto_update,
-      'launch_library_id': launch_library_id,
+      'auto_update': autoUpdate,
+      'launch_library_id': launchLibraryId,
       'failures': failures,
-      'flight_number': flight_number,
+      'flight_number': flightNumber,
       'name': name,
-      'date_utc': date_utc,
-      'date_unix': date_unix,
-      'date_local': date_local,
-      'date_precision': date_precision,
+      'date_utc': dateUtc,
+      'date_unix': dateUnix,
+      'date_local': dateLocal,
+      'date_precision': datePrecision,
       'upcoming': upcoming,
       'id': id,
     };
@@ -137,15 +137,15 @@ class Launch {
         ships: List<dynamic>.from(map['ships']),
         capsules: List<dynamic>.from(map['capsules']),
         launchpad: map['launchpad'],
-        auto_update: map['auto_update'],
-        launch_library_id: map['launch_library_id'],
+        autoUpdate: map['auto_update'],
+        launchLibraryId: map['launch_library_id'],
         failures: List<dynamic>.from(map['failures']),
-        flight_number: map['flight_number']?.toInt(),
+        flightNumber: map['flight_number']?.toInt(),
         name: map['name'],
-        date_utc: map['date_utc'],
-        date_unix: map['date_unix']?.toInt(),
-        date_local: map['date_local'],
-        date_precision: map['date_precision'],
+        dateUtc: map['date_utc'],
+        dateUnix: map['date_unix']?.toInt(),
+        dateLocal: map['date_local'],
+        datePrecision: map['date_precision'],
         upcoming: map['upcoming'],
         id: map['id'],
         isLike: false);
@@ -163,7 +163,7 @@ class Launch {
 
   @override
   String toString() {
-    return 'Launch(fairings: $fairings, links: $links, rocket: $rocket, success: $success, details: $details, crew: $crew, ships: $ships, capsules: $capsules, launchpad: $launchpad, auto_update: $auto_update, launch_library_id: $launch_library_id, failures: $failures, flight_number: $flight_number, name: $name, date_utc: $date_utc, date_unix: $date_unix, date_local: $date_local, date_precision: $date_precision, upcoming: $upcoming, id: $id)';
+    return 'Launch(fairings: $fairings, links: $links, rocket: $rocket, success: $success, details: $details, crew: $crew, ships: $ships, capsules: $capsules, launchpad: $launchpad, auto_update: $autoUpdate, launch_library_id: $launchLibraryId, failures: $failures, flight_number: $flightNumber, name: $name, date_utc: $dateUtc, date_unix: $dateUnix, date_local: $dateLocal, date_precision: $datePrecision, upcoming: $upcoming, id: $id)';
   }
 
   @override
@@ -180,15 +180,15 @@ class Launch {
         listEquals(o.ships, ships) &&
         listEquals(o.capsules, capsules) &&
         o.launchpad == launchpad &&
-        o.auto_update == auto_update &&
-        o.launch_library_id == launch_library_id &&
+        o.autoUpdate == autoUpdate &&
+        o.launchLibraryId == launchLibraryId &&
         listEquals(o.failures, failures) &&
-        o.flight_number == flight_number &&
+        o.flightNumber == flightNumber &&
         o.name == name &&
-        o.date_utc == date_utc &&
-        o.date_unix == date_unix &&
-        o.date_local == date_local &&
-        o.date_precision == date_precision &&
+        o.dateUtc == dateUtc &&
+        o.dateUnix == dateUnix &&
+        o.dateLocal == dateLocal &&
+        o.datePrecision == datePrecision &&
         o.upcoming == upcoming &&
         o.id == id;
   }
@@ -204,15 +204,15 @@ class Launch {
         ships.hashCode ^
         capsules.hashCode ^
         launchpad.hashCode ^
-        auto_update.hashCode ^
-        launch_library_id.hashCode ^
+        autoUpdate.hashCode ^
+        launchLibraryId.hashCode ^
         failures.hashCode ^
-        flight_number.hashCode ^
+        flightNumber.hashCode ^
         name.hashCode ^
-        date_utc.hashCode ^
-        date_unix.hashCode ^
-        date_local.hashCode ^
-        date_precision.hashCode ^
+        dateUtc.hashCode ^
+        dateUnix.hashCode ^
+        dateLocal.hashCode ^
+        datePrecision.hashCode ^
         upcoming.hashCode ^
         id.hashCode;
   }

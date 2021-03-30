@@ -123,11 +123,9 @@ class LaunchManager {
   }
 
   void envoieNotification(Launch launch) async {
-    //var scheduleNotificationDateTime =
-    //    tz.TZDateTime.now(tz.UTC).add(const Duration(seconds: 1));
     //paramétrage de la date pour la planification de la notif
     var scheduleNotificationDateTime =
-        tz.TZDateTime.parse(tz.UTC, launch.date_utc);
+        tz.TZDateTime.parse(tz.UTC, launch.dateUtc);
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'alarm_notif',
@@ -140,7 +138,7 @@ class LaunchManager {
         NotificationDetails(android: androidPlatformChannelSpecifics);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      launch.flight_number,
+      launch.flightNumber,
       '${launch.name} is launching!',
       '${launch.name} is launching right now. Don\'t miss it!',
       scheduleNotificationDateTime,

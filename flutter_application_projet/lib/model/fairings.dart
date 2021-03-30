@@ -6,25 +6,25 @@ import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable(checked: true, explicitToJson: true)
 class Fairings {
   final bool reused;
-  final bool recovery_attempt;
+  final bool recoveryAttempt;
   final bool recovered;
   final List<String> ships;
   Fairings({
     this.reused,
-    this.recovery_attempt,
+    this.recoveryAttempt,
     this.recovered,
     this.ships,
   });
 
   Fairings copyWith({
     bool reused,
-    bool recovery_attempt,
+    bool recoveryAttempt,
     bool recovered,
     List<String> ships,
   }) {
     return Fairings(
       reused: reused ?? this.reused,
-      recovery_attempt: recovery_attempt ?? this.recovery_attempt,
+      recoveryAttempt: recoveryAttempt ?? this.recoveryAttempt,
       recovered: recovered ?? this.recovered,
       ships: ships ?? this.ships,
     );
@@ -33,7 +33,7 @@ class Fairings {
   Map<String, dynamic> toMap() {
     return {
       'reused': reused,
-      'recovery_attempt': recovery_attempt,
+      'recovery_attempt': recoveryAttempt,
       'recovered': recovered,
       'ships': ships,
     };
@@ -44,7 +44,7 @@ class Fairings {
 
     return Fairings(
       reused: map['reused'],
-      recovery_attempt: map['recovery_attempt'],
+      recoveryAttempt: map['recovery_attempt'],
       recovered: map['recovered'],
       ships: List<String>.from(map['ships']),
     );
@@ -57,7 +57,7 @@ class Fairings {
 
   @override
   String toString() {
-    return 'Fairings(reused: $reused, recovery_attempt: $recovery_attempt, recovered: $recovered, ships: $ships)';
+    return 'Fairings(reused: $reused, recovery_attempt: $recoveryAttempt, recovered: $recovered, ships: $ships)';
   }
 
   @override
@@ -66,7 +66,7 @@ class Fairings {
 
     return o is Fairings &&
         o.reused == reused &&
-        o.recovery_attempt == recovery_attempt &&
+        o.recoveryAttempt == recoveryAttempt &&
         o.recovered == recovered &&
         listEquals(o.ships, ships);
   }
@@ -74,7 +74,7 @@ class Fairings {
   @override
   int get hashCode {
     return reused.hashCode ^
-        recovery_attempt.hashCode ^
+        recoveryAttempt.hashCode ^
         recovered.hashCode ^
         ships.hashCode;
   }

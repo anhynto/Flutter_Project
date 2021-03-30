@@ -22,9 +22,6 @@ class LaunchpadManager {
         for (var lanchpad in results) {
           launchpads.add(Launchpad.fromMap(lanchpad));
         }
-        /* launches = List<Map<String, dynamic>>.from(response.data["data"])
-            .map((json) => Launch.fromJson(json.toString()))
-            .toList(); */
       }
     } catch (e) {
       print(e);

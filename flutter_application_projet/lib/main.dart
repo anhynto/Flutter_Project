@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_projet/view/company_detail.dart';
 import 'package:flutter_application_projet/view/detail_launch.dart';
 import 'package:flutter_application_projet/view/home.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
               launch = arguments.launch;
             }
             return MaterialPageRoute(builder: (_) => LaunchDetail(launch));
-
+          case SpaceXDetail.route:
+            return MaterialPageRoute(builder: (_) => SpaceXDetail());
           default:
             return MaterialPageRoute(
                 builder: (_) => Scaffold(

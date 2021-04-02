@@ -7,6 +7,8 @@ import 'package:flutter_application_projet/view/map_view.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:intl/intl.dart';
 
+import 'company_detail.dart';
+
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -52,7 +54,9 @@ class _HomePageState extends State<HomePage> {
               actions: [
                 IconButton(
                   icon: Icon(Icons.info),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await Navigator.of(context).pushNamed(SpaceXDetail.route);
+                  },
                 ),
               ],
             ),

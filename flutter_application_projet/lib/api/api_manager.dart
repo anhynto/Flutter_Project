@@ -26,4 +26,7 @@ class ApiManager {
 
   Future<Response<List<dynamic>>> getLaunchpads() async =>
       await dio.get<List<dynamic>>("/landpads");
+
+  Future<Response<Map<String, dynamic>>> getCompanyDetails() async =>
+      await dio.get<Map<String, dynamic>>("/company");
 }
